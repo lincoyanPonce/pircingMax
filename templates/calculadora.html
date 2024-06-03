@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Comisiones Pircing Max</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #1A1D24;
+        color: #ffffff;
+      }
+      .container {
+        margin-top: 50px;
+      }
+      .form-control {
+        background-color: #4e4e4e;
+        color: #ffffff;
+        border: 1px solid #5a5a5a;
+      }
+      .form-control::placeholder {
+        color: #a1a1a1;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+      }
+      .table-responsive {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <div class="container text-center">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Pircing Max Logo" class="mb-4 img-fluid">
+      <h1 class="mb-4">Calculadora de Comisiones Pircing Max</h1>
+      <form id="dataForm" method="post" enctype="multipart/form-data" class="mb-5">
+        <div class="form-group">
+          <textarea id="inputText" class="form-control mb-3" rows="5" placeholder="Ingresa los datos con este formato Descripcion: nombre-valor1-valor2-valor3" name="inputText"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Generar Excel</button>
+      </form>
+      <div id="results" class="table-responsive">
+        <!-- Los resultados en tiempo real se mostrarán aquí -->
+      </div>
+    </div>
+    <footer class="mt-auto text-center">
+      <p>&copy; 2024 Pircing Max</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      document.getElementById('inputText').addEventListener('input', function() {
+        let inputText = this.value;
+        inputText = inputText.replace(/\s+/g, '');  // Eliminar todos los espacios
+        const resultsDiv = document.getElementById('results');
+        const regex = /([\w\s]+)-(\d+[\.,]?\d*)[-](\d+[\.,]?\d*)[-]?(\d+[\.,]?\d*)?/g;
+        let tableContent = '<table class="table table-dark table-striped"><thead><tr><th>Nombre</th><th>Perforacion</th><th>Joya</th><th>Suero/Cadena</th><th>Comisión Perforacion 30%</th><th>Comisión Joya 25%</th><th>Comisión Suero/Cadena 15%</th></tr></thead><tbody>';
+        let match;
+
+        while ((match = regex.exec(inputText)) !== null) {
+          const nombre = match[1].trim();
+          const perforacion = parseFloat(match[2].replace('.', '').replace(',', '.'));
+          const joya = parseFloat(match[3].replace('.', '').replace(',', '.'));
+          const sueroCadena = parseFloat(match[4] ? match[4].replace('.', '').replace(',', '.') : 0);
+          const comisionPerforacion = perforacion * 0.30;
+          const comisionJoya = joya * 0.25;
+          const comisionSueroCadena = sueroCadena * 0.15;
+          tableContent += `<tr><td>${nombre}</td><td>${perforacion}</td><td>${joya}</td><td>${sueroCadena}</td><td>${comisionPerforacion.toFixed(0)}</td><td>${comisionJoya.toFixed(0)}</td><td>${comisionSueroCadena.toFixed(0)}</td></tr>`;
+        }
+
+        tableContent += '</tbody></table>';
+        resultsDiv.innerHTML = tableContent;
+      });
+    </script>
+  </body>
+</html>
