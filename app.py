@@ -30,10 +30,10 @@ def guardar_en_excel(datos, archivo_excel):
     datos_con_fecha = [(fecha_actual, nombre, perforacion, joya, sueroCadena) for nombre, perforacion, joya, sueroCadena in datos]
 
     # Crear DataFrame con la nueva columna de fecha en la primera posición
-    df = pd.DataFrame(datos_con_fecha, columns=['Fecha', 'Nombre', 'Perforacion', 'Joya', 'Suero/Cadena'])
-    df['Comisión Perforacion'] = df['Perforacion'] * 0.30
-    df['Comisión Joya'] = df['Joya'] * 0.25
-    df['Comisión Suero/Cadena'] = df['Suero/Cadena'] * 0.15
+    df = pd.DataFrame(datos_con_fecha, columns=['Fecha', 'Nombre', 'Perf', 'Joya', 'Suer/Cad'])
+    df['C.Perf'] = df['Perf'] * 0.30
+    df['C.Joya'] = df['Joya'] * 0.25
+    df['C.Suer/Cad'] = df['Suer/Cad'] * 0.15
 
     wb = Workbook()
     ws = wb.active
@@ -44,8 +44,8 @@ def guardar_en_excel(datos, archivo_excel):
 
     # Ajustar la referencia de la tabla
     max_row = len(df) + 1
-    max_col = 8  # Actualiza el número de columnas
-    table_ref = f"A1:H{max_row}"  # Actualiza el rango de la tabla
+    max_col = len(df.columns)
+    table_ref = f"A1:H{max_row}"
 
     tab = Table(displayName="Table1", ref=table_ref)
     style = TableStyleInfo(
@@ -62,13 +62,13 @@ def guardar_en_excel(datos, archivo_excel):
     ws_summary = wb.create_sheet(title="Resumen")
 
     # Escribir los encabezados en la hoja de resumen
-    headers = ['Perforacion', 'Joya', 'Suero/Cadena', 'Comisión Perforacion', 'Comisión Joya', 'Comisión Suero/Cadena']
+    headers = ['Perf', 'Joya', 'Suer/Cad', 'C.Perf', 'C.Joya', 'C.Suer/Cad']
     ws_summary.append([''] + headers)
 
     # Escribir las fórmulas para sumar cada columna
-    for col_num, header in enumerate(headers, start=2):
-        col_letter = chr(64 + col_num)
-        formula = f"=SUBTOTAL(9,Datos!{col_letter}2:{col_letter}{max_row})"
+    columnas_datos = ['C', 'D', 'E', 'F', 'G', 'H']
+    for col_num, col_dato in enumerate(columnas_datos, start=2):
+        formula = f"=SUBTOTAL(9,Datos!{col_dato}2:{col_dato}{max_row})"
         ws_summary.cell(row=2, column=col_num, value=formula)
 
     # Guardar el workbook en un objeto de bytes
@@ -98,4 +98,3 @@ def calcula_comision():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
-
