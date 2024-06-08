@@ -67,6 +67,11 @@
       .table {
         min-height: 100%;
       }
+      .bordered-container {
+        border: 2px solid #00aaff; /* Color del borde azul claro */
+        padding: 10px;
+        border-radius: 10px;
+      }
     </style>
   </head>
   <body class="d-flex flex-column min-vh-100">
@@ -75,12 +80,10 @@
       <div class="btn-top-container">
         <button type="submit" form="dataForm" class="btn btn-primary">Generar Excel</button>
       </div>
-      <div class="content">
+      <div class="content bordered-container">
         <div class="left">
           <form id="dataForm" method="post" enctype="multipart/form-data" class="flex-grow-1 d-flex flex-column">
-            <div class="form-group flex-grow-1">
               <textarea id="inputText" class="form-control h-100" placeholder="Ingresa los datos con este formato Descripcion: nombre-valor1-valor2-valor3" name="inputText"></textarea>
-            </div>
           </form>
         </div>
         <div id="results" class="right table-responsive flex-grow-1">
@@ -91,13 +94,12 @@
                 <th>Perforacion</th>
                 <th>Joya</th>
                 <th>Suero/Cadena</th>
-                <th>Comisión Perforacion 30%</th>
-                <th>Comisión Joya 25%</th>
-                <th>Comisión Suero/Cadena 15%</th>
+                <th>Com. Perf 30%</th>
+                <th>Com. Joya 25%</th>
+                <th>Com. Sue/Cad 15%</th>
               </tr>
             </thead>
             <tbody id="tableBody">
-
               <!-- Más filas vacías según sea necesario -->
             </tbody>
           </table>
