@@ -48,6 +48,7 @@
         display: flex;
         flex-direction: column;
         max-width: 66.67%; /* Ajuste para usar 2/3 del ancho */
+        overflow-y: auto;
       }
       .btn-container {
         display: flex;
@@ -63,14 +64,17 @@
         height: 30px;
         margin-left: 10px;
       }
+      .table {
+        min-height: 100%;
+      }
     </style>
   </head>
   <body class="d-flex flex-column min-vh-100">
     <div class="container-fluid text-center">
+      <h1 class="mb-4">Calculadora de Comisiones Pircing Max</h1>
       <div class="btn-top-container">
         <button type="submit" form="dataForm" class="btn btn-primary">Generar Excel</button>
       </div>
-      <h1 class="mb-4">Calculadora de Comisiones Pircing Max</h1>
       <div class="content">
         <div class="left">
           <form id="dataForm" method="post" enctype="multipart/form-data" class="flex-grow-1 d-flex flex-column">
@@ -80,7 +84,23 @@
           </form>
         </div>
         <div id="results" class="right table-responsive flex-grow-1">
-          <!-- Los resultados en tiempo real se mostrarán aquí -->
+          <table class="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Perforacion</th>
+                <th>Joya</th>
+                <th>Suero/Cadena</th>
+                <th>Comisión Perforacion 30%</th>
+                <th>Comisión Joya 25%</th>
+                <th>Comisión Suero/Cadena 15%</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+
+              <!-- Más filas vacías según sea necesario -->
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -95,8 +115,9 @@
         let inputText = this.value;
         inputText = inputText.replace(/\s+/g, '');  // Eliminar todos los espacios
         const resultsDiv = document.getElementById('results');
+        const tableBody = document.getElementById('tableBody');
         const regex = /([\w\s]+)-(\d+[\.,]?\d*)[-](\d+[\.,]?\d*)[-]?(\d+[\.,]?\d*)?/g;
-        let tableContent = '<table class="table table-dark table-striped"><thead><tr><th>Nombre</th><th>Perforacion</th><th>Joya</th><th>Suero/Cadena</th><th>Comisión Perforacion 30%</th><th>Comisión Joya 25%</th><th>Comisión Suero/Cadena 15%</th></tr></thead><tbody>';
+        let tableContent = '';
         let match;
 
         while ((match = regex.exec(inputText)) !== null) {
@@ -110,8 +131,14 @@
           tableContent += `<tr><td>${nombre}</td><td>${perforacion}</td><td>${joya}</td><td>${sueroCadena}</td><td>${comisionPerforacion.toFixed(0)}</td><td>${comisionJoya.toFixed(0)}</td><td>${comisionSueroCadena.toFixed(0)}</td></tr>`;
         }
 
-        tableContent += '</tbody></table>';
-        resultsDiv.innerHTML = tableContent;
+        // Si no hay datos ingresados, mostrar las filas vacías predeterminadas
+        if (!tableContent) {
+          tableContent = `<tr><td>-</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                          <tr><td>-</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                          <tr><td>-</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>`;
+        }
+
+        tableBody.innerHTML = tableContent;
       });
     </script>
   </body>
