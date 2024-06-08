@@ -1,148 +1,193 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Comisiones Pircing Max</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      body {
-        background-color: #1A1D24;
-        color: #ffffff;
-      }
-      .container {
-        margin-top: 50px;
-      }
-      .form-control {
-        background-color: #4e4e4e;
-        color: #ffffff;
-        border: 1px solid #5a5a5a;
-      }
-      .form-control::placeholder {
-        color: #a1a1a1;
-      }
-      .btn-primary {
-        background-color: #6c0e6e;
-        border-color: #110c3f;
-        width: 300px;
-      }
-      .table-responsive {
-        margin-top: 20px;
-      }
-      .content {
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch;
-        height: calc(100vh - 200px); /* Ajuste de altura para evitar el footer y margen superior */
-      }
-      .left {
-        flex: 1;
-        margin-right: 15px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        margin-left: 5px;
-        display: flex;
-        flex-direction: column;
-        max-width: 33.33%; /* Ajuste para usar 1/3 del ancho */
-        border-radius: 10px;
-        box-shadow: 0 0 5px 3px rgba(91, 37, 180, 0.5); /* Efecto neón */
-      }
-      .right {
-        flex: 2;
-        margin: 5px;
-        display: flex;
-        flex-direction: column;
-        max-width: 66.67%; /* Ajuste para usar 2/3 del ancho */
-        overflow-y: auto;
-        border-radius: 10px;
-        box-shadow: 0 0 5px 3px rgba(91, 37, 180, 0.5);/* Efecto neón*/
-      }
-      .btn-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 10px;
-      }
-      .btn-top-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-      }
-      footer img {
-        height: 30px;
-        margin-left: 10px;
-      }
-      .table {
-        min-height: 100%;
-      }
-      .bordered-container {
-        border: 2px solid #8a0a8f; /* Color del borde azul claro */
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(185, 56, 185, 0.8); /* Efecto neón azul para el contenedor */
-      }
-    </style>
-  </head>
-  <body class="d-flex flex-column min-vh-100">
-    <div class="container-fluid text-center">
-      <h1 class="mb-4">Calculadora de Comisiones</h1>
-      <div class="btn-top-container">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Comisiones Pircing Max</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1A1D24;
+      color: #ffffff;
+    }
+    .container {
+      margin-top: 50px;
+    }
+.form-control {
+  background-color: #4e4e4e;
+  color: #ffffff;
+  border: 1px solid #5a5a5a;
+}
+
+.form-control::placeholder {
+  color: #a1a1a1;
+}
+
+.form-control:focus {
+  background-color: #4e4e4e; /* Mantén el mismo color de fondo */
+  color: #ffffff; /* Mantén el mismo color de texto */
+  border-color: #c694c6; /* Opcional: cambiar el color del borde cuando se enfoca */
+}
+
+.form-control:-webkit-autofill {
+  background-color: #4e4e4e !important; /* Asegura que el color de fondo sea el mismo al autofill */
+  color: #ffffff !important; /* Asegura que el color del texto sea el mismo al autofill */
+}
+    .btn-primary {
+  background-color: #6c0e6e;
+  border-color: #110c3f;
+  width: 100%;
+  max-width: 20%; /* Define el ancho máximo */
+  margin: 0 auto; /* Centra el botón horizontalmente */
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #5a0a5a; /* Ajusta a un morado más oscuro para el efecto hover */
+  border-color: #110c3f;
+  box-shadow: 0 0 10px rgba(185, 56, 185, 0.8); /* Efecto neón al hacer hover */
+}
+    .table-responsive {
+      margin-top: 20px;
+    }
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      height: calc(100vh - 200px); /* Ajuste de altura para evitar el footer y margen superior */
+    }
+    .left {
+      flex: 1;
+      margin-right: 15px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      display: flex;
+      flex-direction: column;
+      max-width: 33.33%; /* Ajuste para usar 1/3 del ancho */
+      border-radius: 10px;
+      box-shadow: 0 0 5px 3px rgba(91, 37, 180, 0.5); /* Efecto neón */
+    }
+    .right {
+      flex: 2;
+      margin: 5px;
+      display: flex;
+      flex-direction: column;
+      max-width: 66.67%; /* Ajuste para usar 2/3 del ancho */
+      overflow-y: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 5px 3px rgba(91, 37, 180, 0.5);/* Efecto neón*/
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 5px;
+    }
+    .btn-top-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 5px;
+      width: 100%; /* Asegura que el contenedor del botón ocupe todo el ancho */
+    }
+    footer img {
+      height: 30px;
+      margin-left: 10px;
+    }
+    .table {
+      min-height: 100%;
+    }
+    .bordered-container {
+      border: 2px solid #8a0a8f; /* Color del borde azul claro */
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(185, 56, 185, 0.8); /* Efecto neón azul para el contenedor */
+    }
+    h1 {
+      text-shadow: 0 0 1px rgba(185, 56, 185, 0.8), 0 0 1px rgba(185, 56, 185, 0.8), 0 0 1px rgba(185, 56, 185, 0.8), 0 0 20px rgba(185, 56, 185, 0.8); /* Efecto neón */
+      white-space: nowrap; /* Evita que el texto use más de una línea */
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
+    }
+    .title-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <div class="container-fluid text-center">
+    <div class="header-container">
+      <div class="title-container">
+        <h1 class="mb-4">Calculadora de Comisiones</h1>
+      </div>
+      <div class="btn-top-container text-center">
         <button type="submit" form="dataForm" class="btn btn-primary">Generar Excel</button>
       </div>
-      <div class="content bordered-container">
-        <div class="left">
-          <form id="dataForm" method="post" enctype="multipart/form-data" class="flex-grow-1 d-flex flex-column">
-              <textarea id="inputText" class="form-control h-100" placeholder="Ingresa los datos con este formato Descripcion: nombre-valor1-valor2-valor3" name="inputText"></textarea>
-          </form>
-        </div>
-        <div id="results" class="right table-responsive flex-grow-1">
-          <table class="table table-dark table-striped">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Perforacion</th>
-                <th>Joya</th>
-                <th>Suero/Cadena</th>
-                <th>Com. Perf 30%</th>
-                <th>Com. Joya 25%</th>
-                <th>Com. Sue/Cad 15%</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody">
-              <!-- Más filas vacías según sea necesario -->
-            </tbody>
-          </table>
-        </div>
+    </div>
+    <div class="content bordered-container">
+      <div class="left">
+        <form id="dataForm" method="post" enctype="multipart/form-data" class="flex-grow-1 d-flex flex-column">
+          <textarea id="inputText" class="form-control h-100" placeholder="Ingresa los datos con este formato Descripcion: nombre-valor1-valor2-valor3" name="inputText"></textarea>
+        </form>
+      </div>
+      <div id="results" class="right table-responsive flex-grow-1">
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Perforacion</th>
+              <th>Joya</th>
+              <th>Suero/Cadena</th>
+              <th>Com. Perf 30%</th>
+              <th>Com. Joya 25%</th>
+              <th>Com. Sue/Cad 15%</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Más filas vacías según sea necesario -->
+          </tbody>
+        </table>
       </div>
     </div>
-    <footer class="mt-auto text-center">
-      <p>&copy; 2024 Pircing Max <img src="{{ url_for('static', filename='logo.png') }}" alt="Pircing Max Logo"></p>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-      document.getElementById('inputText').addEventListener('input', function() {
-        let inputText = this.value;
-        inputText = inputText.replace(/\s+/g, '');  // Eliminar todos los espacios
-        const resultsDiv = document.getElementById('results');
-        const tableBody = document.getElementById('tableBody');
-        const regex = /([\w\s]+)-(\d+[\.,]?\d*)[-](\d+[\.,]?\d*)[-]?(\d+[\.,]?\d*)?/g;
-        let tableContent = '';
-        let match;
+  </div>
+  <footer class="mt-auto text-center">
+    <p>&copy; 2024 Pircing Max <img src="{{ url_for('static', filename='logo.png') }}" alt="Pircing Max Logo"></p>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.getElementById('inputText').addEventListener('input', function() {
+      let inputText = this.value;
+      inputText = inputText.replace(/\s+/g, '');  // Eliminar todos los espacios
+      const resultsDiv = document.getElementById('results');
+      const tableBody = document.getElementById('tableBody');
+      const regex = /([\w\s]+)-(\d+[\.,]?\d*)[-](\d+[\.,]?\d*)[-]?(\d+[\.,]?\d*)?/g;
+      let tableContent = '';
+      let match;
 
-        while ((match = regex.exec(inputText)) !== null) {
-          const nombre = match[1].trim();
-          const perforacion = parseFloat(match[2].replace('.', '').replace(',', '.'));
-          const joya = parseFloat(match[3].replace('.', '').replace(',', '.'));
-          const sueroCadena = parseFloat(match[4] ? match[4].replace('.', '').replace(',', '.') : 0);
-          const comisionPerforacion = perforacion * 0.30;
-          const comisionJoya = joya * 0.25;
-          const comisionSueroCadena = sueroCadena * 0.15;
-          tableContent += `<tr><td>${nombre}</td><td>${perforacion}</td><td>${joya}</td><td>${sueroCadena}</td><td>${comisionPerforacion.toFixed(0)}</td><td>${comisionJoya.toFixed(0)}</td><td>${comisionSueroCadena.toFixed(0)}</td></tr>`;
-        }
+      while ((match = regex.exec(inputText)) !== null) {
+        const nombre = match[1].trim();
+        const perforacion = parseFloat(match[2].replace('.', '').replace(',', '.'));
+        const joya = parseFloat(match[3].replace('.', '').replace(',', '.'));
+        const sueroCadena = parseFloat(match[4] ? match[4].replace('.', '').replace(',', '.') : 0);
+        const comisionPerforacion = perforacion * 0.30;
+        const comisionJoya = joya * 0.25;
+        const comisionSueroCadena = sueroCadena * 0.15;
+        tableContent += `<tr><td>${nombre}</td><td>${perforacion}</td><td>${joya}</td><td>${sueroCadena}</td><td>${comisionPerforacion.toFixed(0)}</td><td>${comisionJoya.toFixed(0)}</td><td>${comisionSueroCadena.toFixed(0)}</td></tr>`;
+      }
 
-        // Si no hay datos ingresados, mostrar las filas vacías predeterminadas
-        if (!tableContent) {
+      // Si no hay datos ingresados, mostrar las filas vacías predeterminadas
+      if (!tableContent) {
           tableContent = `<tr><td>-</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
                           <tr><td>-</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
                           <tr><td>-</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>`;
