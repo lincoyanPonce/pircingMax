@@ -22,34 +22,70 @@
         color: #a1a1a1;
       }
       .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-      }
-      .btn-primary:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
+        background-color: #0e0f6e;
+        border-color: #110c3f;
+        width: 200px;
       }
       .table-responsive {
         margin-top: 20px;
       }
+      .content {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        height: calc(100vh - 200px); /* Ajuste de altura para evitar el footer y margen superior */
+      }
+      .left {
+        flex: 1;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        max-width: 33.33%; /* Ajuste para usar 1/3 del ancho */
+      }
+      .right {
+        flex: 2;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        max-width: 66.67%; /* Ajuste para usar 2/3 del ancho */
+      }
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .btn-top-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      footer img {
+        height: 30px;
+        margin-left: 10px;
+      }
     </style>
   </head>
   <body class="d-flex flex-column min-vh-100">
-    <div class="container text-center">
-      <img src="{{ url_for('static', filename='logo.png') }}" alt="Pircing Max Logo" class="mb-4 img-fluid">
+    <div class="container-fluid text-center">
+      <div class="btn-top-container">
+        <button type="submit" form="dataForm" class="btn btn-primary">Generar Excel</button>
+      </div>
       <h1 class="mb-4">Calculadora de Comisiones Pircing Max</h1>
-      <form id="dataForm" method="post" enctype="multipart/form-data" class="mb-5">
-        <div class="form-group">
-          <textarea id="inputText" class="form-control mb-3" rows="5" placeholder="Ingresa los datos con este formato Descripcion: nombre-valor1-valor2-valor3" name="inputText"></textarea>
+      <div class="content">
+        <div class="left">
+          <form id="dataForm" method="post" enctype="multipart/form-data" class="flex-grow-1 d-flex flex-column">
+            <div class="form-group flex-grow-1">
+              <textarea id="inputText" class="form-control h-100" placeholder="Ingresa los datos con este formato Descripcion: nombre-valor1-valor2-valor3" name="inputText"></textarea>
+            </div>
+          </form>
         </div>
-        <button type="submit" class="btn btn-primary">Generar Excel</button>
-      </form>
-      <div id="results" class="table-responsive">
-        <!-- Los resultados en tiempo real se mostrarán aquí -->
+        <div id="results" class="right table-responsive flex-grow-1">
+          <!-- Los resultados en tiempo real se mostrarán aquí -->
+        </div>
       </div>
     </div>
     <footer class="mt-auto text-center">
-      <p>&copy; 2024 Pircing Max</p>
+      <p>&copy; 2024 Pircing Max <img src="{{ url_for('static', filename='logo.png') }}" alt="Pircing Max Logo"></p>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
