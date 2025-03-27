@@ -9,6 +9,9 @@ from openpyxl.styles import PatternFill, Font
 from openpyxl.worksheet.table import Table, TableStyleInfo
 from datetime import datetime
 import io
+import webbrowser
+import threading
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
@@ -97,4 +100,10 @@ def calcula_comision():
     return render_template('calculadora.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
+    def abrir_navegador():
+        webbrowser.open('http://localhost:5004/pircing_max/calcula_comision', new=1)
+
+    if not os.environ.get("PYINSTALLER_FROZEN") or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        threading.Timer(1.0, abrir_navegador).start()
+
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5004)), debug=False)
