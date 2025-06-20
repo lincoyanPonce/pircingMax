@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Gestor de Gastos</string>
+
+    <!-- Strings para nav_header_main.xml -->
+    <string name="nav_header_title">Gestor de Gastos</string>
+    <string name="nav_header_subtitle">usuario@example.com</string> <!-- Placeholder -->
+    <string name="nav_header_desc">Cabecera de navegación</string>
+
+    <!-- Strings para activity_main_drawer.xml -->
+    <string name="menu_home">Resumen</string>
+    <string name="menu_stats">Estadísticas</string>
+    <string name="menu_history">Historial</string>
+    <string name="menu_settings">Configuración</string>
+    <string name="menu_group_others">Otros</string>
+
+    <!-- Strings para activity_add_expense.xml -->
+    <string name="add_expense_title">Registrar Gasto</string>
+    <string name="hint_amount">Monto</string>
+    <string name="hint_category">Categoría</string>
+    <string name="button_select_date">Seleccionar Fecha</string>
+    <string name="hint_payment_method">Medio de Pago</string>
+    <string name="hint_description">Descripción (Opcional)</string>
+    <string name="button_save_expense">Guardar Gasto</string>
+    <string name="fab_add_expense_description">Registrar nuevo gasto</string>
+
+    <!-- Strings generales -->
+    <string name="action_settings">Configuración</string>
+
+</resources>
